@@ -33,7 +33,7 @@ import static org.fest.assertions.Assertions.assertThat;
  */
 public class TestUpdate {
 
-    public static final String DB_NAME = "morphia_by_example";
+    public static final String DB_NAME = "db_for_morphia";
     private static Mongo mongo;
     private static DB db;
     private static Datastore ds;
