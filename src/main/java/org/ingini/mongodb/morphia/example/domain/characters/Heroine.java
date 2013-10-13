@@ -1,11 +1,11 @@
-package org.ingini.mongodb.morphia.example.domain.heroes;
+package org.ingini.mongodb.morphia.example.domain.characters;
 
 import com.google.common.collect.Sets;
 import org.ingini.mongodb.morphia.example.domain.beasts.Beast;
 
 import java.util.Set;
 
-import static org.ingini.mongodb.morphia.example.domain.heroes.Gender.FEMALE;
+import static org.ingini.mongodb.morphia.example.domain.characters.Gender.FEMALE;
 
 /**
  * Copyright (c) 2013 Ivan Hristov
@@ -22,7 +22,7 @@ import static org.ingini.mongodb.morphia.example.domain.heroes.Gender.FEMALE;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class Heroine extends Human {
+public class Heroine extends HumanCharacter {
 
     protected Heroine() {
       super();
@@ -31,7 +31,7 @@ public class Heroine extends Human {
     public Heroine(String firstName,
                    String lastName,
                    Address address,
-                   Set<Human> children,
+                   Set<HumanCharacter> children,
                    Set<Beast> beasts) {
         super(firstName, lastName, FEMALE, address, children, beasts);
     }

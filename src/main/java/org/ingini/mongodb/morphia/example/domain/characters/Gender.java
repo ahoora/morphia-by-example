@@ -1,4 +1,4 @@
-package org.ingini.mongodb.morphia.example.domain.heroes;
+package org.ingini.mongodb.morphia.example.domain.characters;
 
 /**
  * Copyright (c) 2013 Ivan Hristov

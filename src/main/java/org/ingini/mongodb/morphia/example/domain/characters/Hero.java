@@ -1,4 +1,4 @@
-package org.ingini.mongodb.morphia.example.domain.heroes;
+package org.ingini.mongodb.morphia.example.domain.characters;
 
 import com.google.common.collect.Sets;
 import org.bson.types.ObjectId;
@@ -6,7 +6,7 @@ import org.ingini.mongodb.morphia.example.domain.beasts.Beast;
 
 import java.util.Set;
 
-import static org.ingini.mongodb.morphia.example.domain.heroes.Gender.MALE;
+import static org.ingini.mongodb.morphia.example.domain.characters.Gender.MALE;
 
 /**
  * Copyright (c) 2013 Ivan Hristov
@@ -23,7 +23,7 @@ import static org.ingini.mongodb.morphia.example.domain.heroes.Gender.MALE;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class Hero extends Human {
+public class Hero extends HumanCharacter {
 
     protected Hero() {
         super();
@@ -33,7 +33,7 @@ public class Hero extends Human {
          String firstName,
          String lastName,
          Address address,
-         Set<Human> children,
+         Set<HumanCharacter> children,
          Set<Beast> beasts) {
         super(id, firstName, lastName, MALE, address, children, beasts);
     }
@@ -42,7 +42,7 @@ public class Hero extends Human {
         return new Hero(null, firstName, lastName, address, null, null);
     }
 
-    public static Hero createHeroWithoutBeasts(String firstName, String lastName, Address address, Set<Human> children) {
+    public static Hero createHeroWithoutBeasts(String firstName, String lastName, Address address, Set<HumanCharacter> children) {
         return new Hero(null, firstName, lastName, address, children, null);
     }
 
@@ -51,7 +51,7 @@ public class Hero extends Human {
                 hero.getChildren(), Sets.newHashSet(beast));
     }
 
-    public static Hero updateChildren(Hero hero, Set<Human> children) {
+    public static Hero updateChildren(Hero hero, Set<HumanCharacter> children) {
         return new Hero(hero.getId(), hero.getFirstName(), hero.getLastName(), hero.getAddress(), children, hero.getBeasts());
     }
 

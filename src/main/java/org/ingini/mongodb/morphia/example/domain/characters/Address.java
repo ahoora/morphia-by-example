@@ -1,4 +1,4 @@
-package org.ingini.mongodb.morphia.example.domain.heroes;
+package org.ingini.mongodb.morphia.example.domain.characters;
 
 import com.google.code.morphia.annotations.Entity;
 import org.apache.commons.lang3.builder.EqualsBuilder;

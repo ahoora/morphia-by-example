@@ -1,20 +1,20 @@
-package org.ingini.mongodb.morphia.example.delete;
+package org.ingini.mongodb.morphia.example.read;
 
 import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Key;
 import com.google.code.morphia.Morphia;
+import com.google.code.morphia.mapping.MappedClass;
+import com.google.common.collect.Lists;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
-import org.ingini.mongodb.morphia.example.domain.characters.Address;
-import org.ingini.mongodb.morphia.example.domain.characters.Heroine;
-import org.ingini.mongodb.morphia.example.domain.characters.HumanCharacter;
-import org.ingini.mongodb.morphia.example.domain.characters.Region;
+import org.ingini.mongodb.morphia.example.domain.weapons.Weapon;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.net.UnknownHostException;
+import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -33,7 +33,7 @@ import static org.fest.assertions.Assertions.assertThat;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class TestDelete {
+public class TestOneWithRegex {
 
     public static final String DB_NAME = "db_for_morphia";
     private static Mongo mongo;
@@ -48,23 +48,34 @@ public class TestDelete {
         ds = morphia.createDatastore(mongo, db.getName());
     }
 
+    private static void cleanup() {
+        for (final MappedClass mc : morphia.getMapper().getMappedClasses()) {
+            db.getCollection(mc.getCollectionName()).drop();
+        }
+
+    }
+
     @AfterClass
     public static void afterClass() {
+        cleanup();
         mongo.close();
     }
 
     @Test
-    public void shouldDeleteDocumentByObjectId() {
+    public void shouldFindWithRegexOperator() {
         //GIVEN
-        Heroine aryaStark = Heroine.createHeroineWithoutChildrenAndNoBeasts("Arya", "Stark", //
-                new Address("Winterfell", "Westeros", Region.THE_NORTH));
+        ds.save(new Weapon("Lightbringer", null, null));
 
-        Key<Heroine> documentKey = ds.save(aryaStark);
+        ds.save(new Weapon("Longclaw", "Valyrian steel", null));
+        ds.save(new Weapon("Dark Sister", "Valyrian steel", null));
+        ds.save(new Weapon("Ice", "Valyrian steel", null));
 
         //WHEN
-        ds.delete(HumanCharacter.class, documentKey.getId());
+        List<Weapon> result = Lists.newArrayList(ds.createQuery(Weapon.class)
+                .filter("material", Pattern.compile("steel.*")));
 
         //THEN
-        assertThat(ds.find(HumanCharacter.class, "id", documentKey.getId()).get()).isNull();
+        assertThat(result).isNotEmpty();
+        assertThat(result).hasSize(3);
     }
 }

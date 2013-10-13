@@ -5,22 +5,20 @@ import com.google.code.morphia.Key;
 import com.google.code.morphia.Morphia;
 import com.google.code.morphia.mapping.MappedClass;
 import com.google.code.morphia.query.Query;
-import com.google.common.collect.Lists;
-import com.mongodb.*;
-import org.ingini.mongodb.morphia.example.domain.heroes.Address;
-import org.ingini.mongodb.morphia.example.domain.heroes.Heroine;
-import org.ingini.mongodb.morphia.example.domain.heroes.Human;
-import org.ingini.mongodb.morphia.example.domain.heroes.Region;
-import org.ingini.mongodb.morphia.example.domain.weapons.Weapon;
+import com.mongodb.DB;
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import org.ingini.mongodb.morphia.example.domain.characters.*;
+import org.ingini.mongodb.morphia.example.util.CollectionManager;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.net.UnknownHostException;
-import java.util.List;
-import java.util.regex.Pattern;
 
 import static org.fest.assertions.Assertions.assertThat;
+import static org.ingini.mongodb.morphia.example.domain.characters.HumanCharacter.COLLECTION_NAME;
 
 /**
  * Copyright (c) 2013 Ivan Hristov
@@ -37,9 +35,11 @@ import static org.fest.assertions.Assertions.assertThat;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class TestRead {
+public class TestFindOne {
 
+    public static final String CHARACTERS = "characters";
     public static final String DB_NAME = "db_for_morphia";
+
     private static Mongo mongo;
     private static DB db;
     private static Datastore ds;
@@ -50,6 +50,7 @@ public class TestRead {
         mongo = new MongoClient("127.0.0.1", 27017);
         db = mongo.getDB(DB_NAME);
         ds = morphia.createDatastore(mongo, db.getName());
+        CollectionManager.cleanAndFill(db, "characters.json", COLLECTION_NAME);
     }
 
     private static void cleanup() {
@@ -73,27 +74,38 @@ public class TestRead {
         Key<Heroine> documentKey = ds.save(aryaStark);
 
         //WHEN
-        Query<Human> result = ds.find(Human.class).field("id").equal(documentKey.getId());
+        Query<HumanCharacter> result = ds.find(HumanCharacter.class).field("id").equal(documentKey.getId());
 
         //THEN
         assertThat(result.get()).isEqualTo(aryaStark);
     }
 
     @Test
-    public void shouldFindWithRegexOperator() {
+    public void shouldFindOneEntryBasedOnGenderAndFirstName() {
         //GIVEN
-        ds.save(new Weapon("Lightbringer", null, null));
-
-        ds.save(new Weapon("Longclaw", "Valyrian steel", null));
-        ds.save(new Weapon("Dark Sister", "Valyrian steel", null));
-        ds.save(new Weapon("Ice", "Valyrian steel", null));
 
         //WHEN
-        Pattern regexp = Pattern.compile("steel.*");
-        List<Weapon> result = Lists.newArrayList(ds.createQuery(Weapon.class).filter("material", regexp));
+        Query<Heroine> result = ds.find(Heroine.class, "gender", Gender.FEMALE).field("first_name").equal("Arya");
 
         //THEN
-        assertThat(result).isNotEmpty();
-        assertThat(result).hasSize(3);
+        assertThat(result.get()).isNotNull();
+
+    }
+
+    @Test
+    @Ignore //debug the runtime exception
+    public void shouldFindOneArrayElement() {
+        //GIVEN
+
+
+        //WHEN
+        Hero humanCharacter = ds.find(Hero.class).field("children")
+                .hasThisElement(Heroine.createHeroineWithoutChildrenAndNoBeasts("Sansa", "Stark",
+                        new Address("Winterfell", "Westeros", Region.THE_NORTH))).get();
+
+        //THEN
+        assertThat(humanCharacter).isNotNull();
+        assertThat(humanCharacter.getFirstName()).isEqualTo("Eddard");
+
     }
 }
