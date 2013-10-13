@@ -33,7 +33,7 @@ import static org.fest.assertions.Assertions.assertThat;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class TestOneWithRegex {
+public class TestFindWithRegex {
 
     public static final String DB_NAME = "db_for_morphia";
     private static Mongo mongo;
