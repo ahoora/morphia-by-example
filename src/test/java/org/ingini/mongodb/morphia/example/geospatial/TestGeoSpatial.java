@@ -1,8 +1,5 @@
 package org.ingini.mongodb.morphia.example.geospatial;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
-import com.google.code.morphia.query.Query;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
@@ -11,6 +8,9 @@ import org.ingini.mongodb.morphia.example.util.CollectionManager;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
 
 import java.net.UnknownHostException;
 

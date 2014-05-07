@@ -1,10 +1,11 @@
 package org.ingini.mongodb.morphia.example.domain.zip;
 
-import com.google.code.morphia.annotations.Entity;
-import com.google.code.morphia.annotations.Id;
-import com.google.code.morphia.annotations.Indexed;
-import com.google.code.morphia.annotations.Property;
-import com.google.code.morphia.utils.IndexDirection;
+
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Indexed;
+import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.utils.IndexDirection;
 
 /**
  * Copyright (c) 2013 Ivan Hristov

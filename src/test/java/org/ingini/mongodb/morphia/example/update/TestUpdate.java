@@ -1,8 +1,5 @@
 package org.ingini.mongodb.morphia.example.update;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Morphia;
-import com.google.code.morphia.mapping.MappedClass;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
@@ -11,6 +8,9 @@ import org.ingini.mongodb.morphia.example.domain.weapons.WeaponDetails;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.mapping.MappedClass;
 
 import java.net.UnknownHostException;
 

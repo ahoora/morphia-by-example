@@ -1,10 +1,5 @@
 package org.ingini.mongodb.morphia.example.read;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Key;
-import com.google.code.morphia.Morphia;
-import com.google.code.morphia.mapping.MappedClass;
-import com.google.code.morphia.query.Query;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
@@ -14,6 +9,11 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.mapping.MappedClass;
+import org.mongodb.morphia.query.Query;
 
 import java.net.UnknownHostException;
 
@@ -37,7 +37,6 @@ import static org.ingini.mongodb.morphia.example.domain.characters.HumanCharacte
  */
 public class TestFindOne {
 
-    public static final String CHARACTERS = "characters";
     public static final String DB_NAME = "db_for_morphia";
 
     private static Mongo mongo;

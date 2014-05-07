@@ -1,14 +1,14 @@
 package org.ingini.mongodb.morphia.example.domain.characters;
 
-import com.google.code.morphia.annotations.*;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.bson.types.ObjectId;
 import org.ingini.mongodb.morphia.example.domain.beasts.Beast;
+import org.mongodb.morphia.annotations.*;
 
 import java.util.Set;
 
-import static org.ingini.mongodb.morphia.example.domain.characters.HumanCharacter.*;
+import static org.ingini.mongodb.morphia.example.domain.characters.HumanCharacter.COLLECTION_NAME;
 
 /**
  * Copyright (c) 2013 Ivan Hristov

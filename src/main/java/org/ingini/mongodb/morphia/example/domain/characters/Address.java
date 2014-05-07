@@ -1,8 +1,8 @@
 package org.ingini.mongodb.morphia.example.domain.characters;
 
-import com.google.code.morphia.annotations.Entity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.mongodb.morphia.annotations.Entity;
 
 /**
  * Copyright (c) 2013 Ivan Hristov

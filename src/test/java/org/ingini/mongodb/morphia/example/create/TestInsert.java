@@ -1,22 +1,21 @@
 package org.ingini.mongodb.morphia.example.create;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Key;
-import com.google.code.morphia.Morphia;
-import com.google.code.morphia.mapping.MappedClass;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import org.fest.assertions.Assertions;
 import org.ingini.mongodb.morphia.example.domain.characters.Address;
 import org.ingini.mongodb.morphia.example.domain.characters.Heroine;
 import org.ingini.mongodb.morphia.example.domain.characters.Region;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.mapping.MappedClass;
 
 import java.net.UnknownHostException;
-
-import static org.fest.assertions.Assertions.assertThat;
 
 /**
  * Copyright (c) 2013 Ivan Hristov
@@ -71,6 +70,6 @@ public class TestInsert {
         Key<Heroine> documentKey = ds.save(aryaStark);
 
         //THEN
-        assertThat(documentKey).isNotNull();
+        Assertions.assertThat(documentKey).isNotNull();
     }
 }

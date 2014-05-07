@@ -1,8 +1,5 @@
 package org.ingini.mongodb.morphia.example.delete;
 
-import com.google.code.morphia.Datastore;
-import com.google.code.morphia.Key;
-import com.google.code.morphia.Morphia;
 import com.mongodb.DB;
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
@@ -13,6 +10,9 @@ import org.ingini.mongodb.morphia.example.domain.characters.Region;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.Key;
+import org.mongodb.morphia.Morphia;
 
 import java.net.UnknownHostException;
 
